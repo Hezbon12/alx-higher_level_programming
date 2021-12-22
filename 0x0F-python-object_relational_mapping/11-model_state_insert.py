@@ -13,20 +13,20 @@ from sqlalchemy.orm import sessionmaker
 if __name__ == "__main__":
 
         # make engine for database
-            user = argv[1]
-                passwd = argv[2]
-                    db = argv[3]
-                        engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.
-                                                           format(user, passwd, db), pool_pre_ping=True)
-                            Base.metadata.create_all(engine)
-                                Session = sessionmaker(bind=engine)
-                                    session = Session()
+        user = argv[1]
+        passwd = argv[2]
+        db = argv[3]
+        engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.
+                                format(user, passwd, db), pool_pre_ping=True)
+        Base.metadata.create_all(engine)
+        Session = sessionmaker(bind=engine)
+        session = Session()
 
-                                        # add new state and commit to table
-                                            new = State(name="Louisiana")
-                                                session.add(new)
-                                                    session.commit()
+        # add new state and commit to table
+        new = State(name="Louisiana")
+        session.add(new)
+        session.commit()
 
-                                                        print("{:d}".format(new.id))
+        print("{:d}".format(new.id))
 
-                                                            session.close()
+        session.close()
