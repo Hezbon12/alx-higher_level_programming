@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-update state: given id, change state name
+delete from table states with names containing letter 'a'
 parameters given to script: username, password, database
 """
 
@@ -22,9 +22,10 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # find and update state (run #7 to see table printed)
-    state = session.query(State).filter_by(id=2).first()
-    state.name = "New Mexico"
+    # find all appropriate states to be deleted
+    states = session.query(State).filter(State.name.like('%a%')).all()
+    for s in states:
+    session.delete(s)
 
     session.commit()
     session.close()
